@@ -2,7 +2,6 @@ require_relative 'spec_helper'
 
 describe Integer do
   subject { rand(1..1000) }
-  let(:factorial) { subject.factorial }
 
   it { expect(subject).to be_kind_of(Integer) }
   it { expect(subject).to respond_to(:factorial) }
@@ -19,11 +18,11 @@ describe Integer do
 
     context 'for positive integers' do
       include_examples 'for positive integers' do
-        let(:number) { factorial }
+        let(:number) { subject.factorial }
       end
 
       it 'should be divisible without reminder by self base' do
-        expect(factorial % subject).to eq(0)
+        expect(subject.factorial % subject).to eq(0)
       end
 
       # from json-file get hash: key - <number>; value - <number>!
@@ -46,9 +45,8 @@ describe Integer do
         expect(101010.sum_digits).to eq(110001.sum_digits)
       end
       it 'should change result by value of appended digit' do
-        digit = rand(10)
-        number = subject * 10 + digit
-        expect(number.sum_digits - subject.sum_digits).to eq(digit)
+        number = subject * 10 + rand(10)
+        expect(number.sum_digits - subject.sum_digits).to eq(number % 10)
       end
 
       context 'if number contains one repeating numeral' do
