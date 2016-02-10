@@ -2,10 +2,10 @@ context 'Integer#sum_digits', :factorial_task, :sum_digits do
   subject { rand(1..1000) }
 
   it 'should return 0 only for 0' do
-   expect(0.sum_digits).to eq(0)
+    expect(0.sum_digits).to eq(0)
   end
   it 'should not depend on count and order of zeros' do
-    expect(101010.sum_digits).to eq(1100001.sum_digits)
+    expect(101_010.sum_digits).to eq(1_100_001.sum_digits)
   end
   it 'should change result by value of appended digit' do
     number = subject * 10 + rand(10)
@@ -25,7 +25,7 @@ context 'Integer#sum_digits', :factorial_task, :sum_digits do
       let(:number) { subject.sum_digits }
     end
   end
-  
+
   context 'should return different results for' do
     it 'numbers with different sum of digits' do
       expect(1111.sum_digits).not_to eq(9999.sum_digits)
@@ -53,5 +53,4 @@ context 'Integer#sum_digits', :factorial_task, :sum_digits do
       expect(number.sum_digits).to eq(number)
     end
   end
-
 end

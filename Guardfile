@@ -36,8 +36,8 @@ end
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: "bundle exec rspec" do
-  require "guard/rspec/dsl"
+guard :rspec, cmd: 'bundle exec rspec' do
+  require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
 
   # Feel free to open issues for suggestions and improvements
@@ -79,4 +79,9 @@ guard :rspec, cmd: "bundle exec rspec" do
   # watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
   #   Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   # end
+end
+
+guard :rubocop do
+  watch(%r{.+\.rb$})
+  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
 end

@@ -6,7 +6,10 @@ describe 'Integer#factorial', :factorial_task, :factorial do
   end
 
   context 'for negative integers' do
-    it { expect((-subject).factorial).to eq(nil) }
+    it do
+      num = - subject
+      expect(num.factorial).to eq(nil)
+    end
   end
 
   context 'for positive integers' do
@@ -22,11 +25,9 @@ describe 'Integer#factorial', :factorial_task, :factorial do
     # .data_from_file() - helper method (from Helpers module)
     # compare #factorial and known value from hash
     data_from_file('factorials_table').each do |base, value|
-      it "for %d should return %E" % [base, value] do
+      it format('for %d should return %E', base, value) do
         expect(base.to_i.factorial).to eq(value)
       end
     end
-
   end
-
 end

@@ -1,9 +1,13 @@
+###############################################################################
+# inmplemented #correct_combinations
+# recursively yields all combinations of correct braces expressions
+# that contain defined number of braces pairs.
+###############################################################################
 module Braces
-
   def correct_combinations(pairs, output = '', open = 0, close = 0, &block)
     # check arguments
     unless output.is_a?(String) && open.is_a?(Integer) && close.is_a?(Integer)
-      raise ArgumentError 
+      fail ArgumentError
     end
 
     # when output will match necessary format
@@ -20,7 +24,5 @@ module Braces
         correct_combinations(pairs, output + ')', open, close + 1, &block)
       end
     end
-
   end
-
 end
