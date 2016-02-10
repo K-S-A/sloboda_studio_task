@@ -1,23 +1,24 @@
 describe Braces, :braces_task do
   subject { Class.new.extend(Braces) }
+  let(:call_combinations) { subject.combinations(1) {} }
 
-  it { expect(subject).to respond_to(:correct_combinations) }
+  it { expect(subject).to respond_to(:combinations) }
 
-  context '#correct_combinations' do
-    it 'should call block_given?' do
-      expect(subject).to receive(:block_given?).once
-      subject.correct_combinations(1)
+  context '#combinations' do
+    it 'should not call block_given?' do
+      expect(subject).not_to receive(:block_given?)
+      call_combinations
     end
 
     it 'should initiate recursive call' do
       # array of arguments in order to be called
       [[1], [1, '(', 1, 0], [1, '()', 1, 1]].each do |args|
-        expect(subject).to receive(:correct_combinations).with(*args)
+        expect(subject).to receive(:combinations).with(*args)
           .and_call_original
           .ordered
       end
 
-      subject.correct_combinations(1)
+      call_combinations
     end
 
     context 'when block given' do
@@ -33,7 +34,7 @@ describe Braces, :braces_task do
 
     context 'when called without arguments' do
       it do
-        expect { subject.correct_combinations }.to raise_error(ArgumentError)
+        expect { subject.combinations }.to raise_error(ArgumentError)
       end
     end
 

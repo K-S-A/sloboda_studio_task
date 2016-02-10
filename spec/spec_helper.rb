@@ -9,7 +9,7 @@ Dir["#{File.expand_path('..', File.dirname(__FILE__))}/lib/*.rb"].each do |file|
 end
 
 RSpec.configure do |config|
-  # extend with helper methods
+  # include Helpers module
   config.include Helpers
 
   config.order = :random

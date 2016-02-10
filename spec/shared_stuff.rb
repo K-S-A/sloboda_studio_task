@@ -12,7 +12,7 @@ shared_examples 'for not permitted arguments' do |arguments, defined_args|
   arguments.each do |arg|
     it "should raise ArgumentError if argument is a #{arg.inspect}" do
       expect do
-        subject.correct_combinations(*defined_args, arg)
+        subject.combinations(*defined_args, arg)
       end.to raise_error(ArgumentError)
     end
   end
@@ -22,7 +22,7 @@ shared_examples 'for permitted arguments' do |arguments, defined_args|
   arguments.each do |arg|
     it "should not raise error if argument is a #{arg.inspect}" do
       expect do
-        subject.correct_combinations(*defined_args, arg)
+        subject.combinations(*defined_args, arg) {}
       end.not_to raise_error
     end
   end
@@ -32,7 +32,7 @@ shared_examples 'for yield times results' do |arguments|
   arguments.each do |argument, sequence|
     it "should yield #{sequence.length} times if called with (#{argument})" do
       expect do |b|
-        subject.correct_combinations(argument.to_i, &b)
+        subject.combinations(argument.to_i, &b)
       end.to yield_control.exactly(sequence.length).times
     end
   end
@@ -42,7 +42,7 @@ shared_examples 'for yield with arguments results' do |arguments|
   arguments.each do |argument, sequence|
     it "should yield with arguments #{sequence} if called with (#{argument})" do
       expect do |b|
-        subject.correct_combinations(argument.to_i, &b)
+        subject.combinations(argument.to_i, &b)
       end.to yield_successive_args(*sequence)
     end
   end
