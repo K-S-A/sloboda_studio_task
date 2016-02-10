@@ -1,4 +1,4 @@
-describe 'Integer#factorial' do
+describe 'Integer#factorial', :factorial_task, :factorial do
   subject { rand(1..1000) }
 
   context 'for 0' do
@@ -19,10 +19,8 @@ describe 'Integer#factorial' do
     end
 
     # get hash from json-file: key - <number>; value - <number>!
-    file = File.read("#{File.dirname(__FILE__)}/../support/factorials_table.json")
-    
     # compare #factorial and known value from hash
-    JSON.parse(file).each do |base, value|
+    data_from_file('factorials_table').each do |base, value|
       it "for %d should return %E" % [base, value] do
         expect(base.to_i.factorial).to eq(value)
       end

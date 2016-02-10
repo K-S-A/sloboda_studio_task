@@ -1,11 +1,11 @@
-context 'Integer#sum_digits' do
+context 'Integer#sum_digits', :factorial_task, :sum_digits do
   subject { rand(1..1000) }
 
   it 'should return 0 only for 0' do
    expect(0.sum_digits).to eq(0)
   end
   it 'should not depend on count and order of zeros' do
-    expect(101010.sum_digits).to eq(110001.sum_digits)
+    expect(101010.sum_digits).to eq(1100001.sum_digits)
   end
   it 'should change result by value of appended digit' do
     number = subject * 10 + rand(10)
@@ -40,7 +40,10 @@ context 'Integer#sum_digits' do
       expect(-55.sum_digits).to eq(55.sum_digits)
     end
     it 'numbers with the same set of digits' do
-      expect(123456.sum_digits).to eq(456321.sum_digits)
+      num_set = '1234567890' * 10
+      shuffle_sum = -> { shuffle_set(num_set).sum_digits }
+
+      expect(shuffle_sum.call).to eq(shuffle_sum.call)
     end
   end
 

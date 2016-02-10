@@ -1,4 +1,4 @@
-describe Integer do
+describe Integer, :factorial_task, :integer do
   subject { rand(1..1000) }
 
   it { expect(subject).to be_kind_of(Integer) }

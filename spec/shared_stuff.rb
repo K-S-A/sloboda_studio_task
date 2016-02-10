@@ -31,3 +31,14 @@ shared_examples "for yield times results" do |arguments|
     end
   end
 end
+
+
+shared_examples "for yield with arguments results" do |arguments|
+  arguments.each do |argument, sequence|
+    it "should yield with arguments #{sequence} if called with (#{argument})" do
+      expect do |b|
+        subject.correct_combinations(argument.to_i, &b)
+      end.to yield_successive_args(*sequence)
+    end
+  end
+end
