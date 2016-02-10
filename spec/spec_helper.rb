@@ -1,7 +1,7 @@
 require 'bundler/setup'
 Bundler.require
 
-require_relative 'shared_examples'
+require 'shared_stuff'
 
 Dir["#{File.expand_path('..', File.dirname(__FILE__))}/lib/*.rb"].each do |file|
   require file

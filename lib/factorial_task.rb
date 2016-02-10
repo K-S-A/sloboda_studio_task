@@ -15,7 +15,7 @@ class Integer
     # num_ord_arr => array of integers ('ords' of string's characters)
     num_ord_arr = self.abs.to_s.unpack('c*')
 
-    # removing zero "base" from result # => i.to_s.ord = '0'.ord + i
+    # excluding zero "base" from result # => i.to_s.ord = '0'.ord + i
     num_ord_arr.inject(:+) - num_ord_arr.length * ?0.ord
   end
 
