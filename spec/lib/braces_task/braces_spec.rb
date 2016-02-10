@@ -6,13 +6,23 @@ describe Braces, :braces_task do
   context '#correct_combinations' do
     
     it 'should call block_given?' do
-      expect(Object).to receive(:block_given?)
+      expect(subject).to receive(:block_given?).once
+      subject.correct_combinations(1)
+    end
+
+    it 'should initiate recursive call' do
+      
+      # array of arguments in order to be called
+      [[1], [1, "(", 1, 0], [1, "()", 1, 1]].each do |args|
+        expect(subject).to receive(:correct_combinations).with(*args).and_call_original.ordered
+      end
+
       subject.correct_combinations(1)
     end
 
     context 'when block given' do
       # get hash from json-file: key - <argument>; value - <sequence of arguments to yield>
-      # .data_from_file() - helper method (from Helper module)
+      # .data_from_file() - helper method (from Helpers module)
       yield_data = data_from_file('braces_data')
 
       include_examples "for yield times results", yield_data

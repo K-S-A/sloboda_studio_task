@@ -19,6 +19,7 @@ describe 'Integer#factorial', :factorial_task, :factorial do
     end
 
     # get hash from json-file: key - <number>; value - <number>!
+    # .data_from_file() - helper method (from Helpers module)
     # compare #factorial and known value from hash
     data_from_file('factorials_table').each do |base, value|
       it "for %d should return %E" % [base, value] do

@@ -13,8 +13,8 @@ module Helpers
   end
 
   module ClassMethods
-    
-    # parse json format to memory
+
+    # parse json file to memory
     def data_from_file(name)
       JSON.parse(read_file(name))
     end
