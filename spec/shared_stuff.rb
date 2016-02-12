@@ -47,3 +47,61 @@ shared_examples 'for yield with arguments results' do |arguments|
     end
   end
 end
+
+# for cities_spec
+
+shared_examples 'initialized with' do |*arguments|
+  arguments.each do |argument|
+    it "should be initialized with #{argument.class}" do
+      expect { Cities.new(argument) }.not_to raise_error
+    end
+  end
+end
+
+shared_examples 'for valid args' do |method, *arguments|
+  arguments.each do |arg|
+    it "should be called with (#{arg.join(', ')})" do
+      expect { subject.public_send(method, *arg) }.not_to raise_error
+    end
+  end
+end
+
+shared_examples 'for invalid args' do |method, *arguments|
+  arguments.each do |arg|
+    it "should raise ArgumentError if called with (#{arg.join(', ')})" do
+      expect { subject.public_send(method, *arg) }.to raise_error(ArgumentError)
+    end
+  end
+end
+
+shared_examples 'arguments check for' do |method|
+  context 'when called without arguments' do
+    it { expect { subject.public_send(method) }.to raise_error(ArgumentError) }
+  end
+
+  context 'when called with one argument' do
+    it do
+      expect { subject.public_send(method, 1) }.to raise_error(ArgumentError)
+    end
+  end
+
+  context 'when called with two arguments' do
+    context 'that are included in subjects#map (index or name of city)' do
+      include_examples 'for valid args', method, [1, 2], [3, 'gdansk'],
+                       ['torun', 1], %w(warszawa bydgoszcz)
+    end
+
+    context 'that are out of subjects#map (index or name of city)' do
+      include_examples 'for invalid args', method, [9, 2], [3, 'paris'],
+                       ['torun', 7]
+    end
+  end
+end
+
+shared_examples 'return values for' do |method, arguments|
+  arguments.each do |arg, res|
+    it "should return #{res} if called with (\"#{arg.join('", "')}\")" do
+      expect(subject.public_send(method, *arg)).to eq(res)
+    end
+  end
+end

@@ -1,7 +1,7 @@
 ###############################################################################
-# inmplemented #combinations
-# recursively yields all combinations of correct braces expressions
-# that contain defined number of braces pairs.
+# Inmplemented #combinations
+# recursively yields all combinations of
+# correct braces expressions (contain defined number of braces pairs).
 ###############################################################################
 module Braces
   def combinations(pairs, output = '', open = 0, close = 0, &block)

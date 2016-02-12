@@ -1,4 +1,6 @@
+###############################################################################
 # add .factorial and .sum_digits methods
+###############################################################################
 class Integer
   # => return integer or nil
   def factorial
@@ -10,6 +12,7 @@ class Integer
   # For large numbers allmost 2x faster than
   # `self.to_s.chars.inject(0){ |sum, n| sum + n.to_i }`
   # The fastest for both small and large numbers.
+  # See 'benchmark/factorial_bm.rb'
   # => return not-negative integer
   def sum_digits
     # num_ord_arr => array of integers ('ords' of string's characters)
