@@ -2,9 +2,9 @@
 ---
 ## Structure
 - Source code (`lib/`):
-  - `braces_task.rb` (code for first task);
-  - `cities_task.rb` (code for second task);
-  - `factorial_task.rb` (code for third task).
+  - [`braces_task.rb`](https://github.com/K-S-A/sloboda_studio_task/blob/master/lib/braces_task.rb) (code for first task);
+  - [`cities_task.rb`](https://github.com/K-S-A/sloboda_studio_task/blob/master/lib/cities_task.rb) (code for second task);
+  - [`factorial_task.rb`](https://github.com/K-S-A/sloboda_studio_task/blob/master/lib/factorial_task.rb) (code for third task).
 - Unit tests (`spec/`):
   - `lib/braces_task/braces_spec.rb` (specs for first task code);
   - `lib/cities_task/cities_spec.rb` (specs for second task code);
